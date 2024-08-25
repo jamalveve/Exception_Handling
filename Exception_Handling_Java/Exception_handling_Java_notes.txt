@@ -62,17 +62,17 @@ EXCEPTION HANDLING
  
 try-catch-finally rukles
 ^^^^^^^^^^^^^^^^^^^^^^^
- ->one try block can have multiple Catch block
+1) ->one try block can have multiple Catch block
  try{
  }catch(){
  }catch(){
  }
- ->try catch can work without finnally
- ->catch is allways followed by finally block
- ->finally block is always executed in all the cases except
- 4 case:
- 1)JVM Crash:
- 2)
+ 2)->try catch can work without finnally
+ 3)->catch is allways followed by finally block
+ 4)->finally block is always executed in all the cases except
+              4 case:
+                 1)JVM Crash:
+                    2)
  
  try{
  }catch(){
@@ -82,7 +82,10 @@ try-catch-finally rukles
  case2:exception occured,catch block not handled->finally executes
  case3:exception doesnot occured ,cat block ignored->finally executes
  }
- 
+ 5)try catch with nested try catch block
+ 6) try and finnly can alos be there can compile if no runtime error 
+ &) try  cant be alone itshpould be either followed by catch/finally for compile
+ 8) try  cant be alone itshpoulb be either followed by catch if exception there for runtime
  
  
  ->Y finally block?if you want to execute any statements which is not depedning the exception y
@@ -110,6 +113,8 @@ Throw key word
      ->You can use throw without throws for runtime exceptions,(UNchecked exception)
      ->throw keywrd must use with throws for checked and userdefined exception
  
+ 
+ 
  Throws keyword
  *****************
  	->you should use throws in the method signature when you throw some exception in that method
@@ -125,3 +130,67 @@ Throwable is a class which is superclass for all the errors nd exception in java
 Only instanves of this class or subclass are thrown  by  jvm or  by throw statement
 ->if you want to create you own custin excption ,then you class musr extend the throwabke ckass or its subaclss
  
+ 
+ 
+TRY WITH RESOURCES
+##################
+what is?
+************
+->​The "try-with-resources" statement in Java is an feature for managing resources effectively.
+->it ensure the resources closes automatically
+->so it implements closeable /autocloesable interface
+->so whichever implmentimg this interface it is autocloseable wwe can go fro try with resourecs
+->basicall we ll use finally{} to close but from java 7 we have this feature
+-> promoting cleaner code, and enhancing error handling capabilities
+
+Use/need of it:?
+******************
+-> various scenarios such as file handling, database operations, and network communications.
+->wjherevere we need to open and close we can go for trywith resources
+->perevious developer will write try,catch finally to close this, but try wuth resources ensure resources were properly released, l
+
+ Advantages of Try-With-Resources
+ *********************************
+1)Automatic Resource Management: 
+2)Cleaner Code
+3)Enhanced Exception Handling:
+4)Supports Multiple Resources
+
+
+.When to Use Try-With-Resources
+*********************************
+Use "try-with-resources" in scenarios where you handle resources that must be closed after use, such as:
+
+File Handling: Reading or writing data to files, where file streams or writers are utilized.
+
+Database Connections: Managing connections to databases, especially when executing queries and updates.
+
+Network Sockets: For network communications where sockets are opened and need to be properly closed after use.
+
+
+Exception Handling with Inheritance:
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+Parent                                         child
+ 
+ Unchecked Exception                     ->same/different unchecked Exception
+                                         ->no Exception
+                                         
+                                         
+                                          ->only same checked Exception
+ Checked exception                       -> no exception
+                                          ->also Unchecked Exception
+                 
+                                          
+                                          
+            https://javaconceptoftheday.com/java-exception-handling-quiz/
+            
+            
+ 1)) Catch block takes one argument of type java.lang.Object. True OR False?
+
+
+View Answer
+False. Catch block takes one argument of type java.lang.Throwable.
+
+2) Pipe (|) operator is introduced in Java 7 to catch the multiple exceptions using single catch block. Yes OR No?
+yes

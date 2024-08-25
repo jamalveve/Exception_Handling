@@ -1,0 +1,159 @@
+what is thread?
+%%%%%%%%%%%%%%%%%
+ ->Thread is a lightweight subprocess
+ ->in an app.so we have one mean time,when app is running,os is gooing to create oneprpocess's
+ sameway in java jvm will take care of java app and prcoess wpuld be createed ,every process willhace main theread
+ ->it is smallest indepent unit of the program
+ ->it contains spoearate path of execution
+ ->every java app will have main thread
+ ->java.lang.thread
+ 
+Thread lifecycle
+%%%%%%%%%%%%%%%%%
+once we crete a theread,
+->thread can stay only one of the states at one time those state:
+1)new ->creating a new theread,born theread
+2)runnable->once we start it wlill bein this state
+between this may be waiting state happens
+waiting state->theread is not peforming te action,(inactivety)it might wait for other thread to givr back the data/or sleeping/or might be bloked in some scenario
+3)running->it si running now using the run method->we have to override from Tread class
+4)Termiated->once it is done it will be in this state
+
+Ex:we have media player 
+now we are plaing some audio
+once we start the song it will be runmable and running(playing) and it will run until the song ends and cometo terminated stage once the song over.
+
+ex:dowloading theimage from online
+start download-new 
+started downloading-runnable
+downloading-runnning
+downloaed-terminated
+
+if any networ pbm comes it will wait so that can happend between "started dwonloading" and "downloading"
+
+
+
+Creating a thread?
+first we need to understand why we need thread?
+
+we by deafult have thread in java is main method we have in our class
+so wehen ever you run your java app ,the code will be in main method()
+main method will have the instrucionss wrritten  within it and all those instrucitions will run one after another as part of maij theread
+
+so what if it is a long running operation we are doing in the main method so the others instructions gets blocked 	
+thats why we will get the pop up app is not responding wait/quit this is bcz of such scenario only
+so in that case we should not load so much on our main method
+
+so for this we are creating a few new thread by our own
+by two ways
+************
+1)create a threadclass extends Thread->override run () method->create object of that class->invoke start() method to execute our customs theread
+
+the drawback in first step if you want to inherit Thread class and also some other class you cant extend two class at same time bc mutliple inheritance is not possible in java so
+
+2)we have Interface called Runnable
+create a class implements Runnable-> simillar all other
+
+
+Main method
+^^^^^^^^^^^^
+main thread is the most imp thread of every java app
+->it is executed when java pgm starts
+->every program muts contain this thread for its execution	
+->form this other child  can be created and starts in main thered  onlu
+->and main thread only tereminated it is the end f the application	
+->if we have multiple threads means also all threads we will call in main thread only
+
+
+Daemon Threads
+***************
+
+
+
+MultiThread
+***************
+ability of thr program to run two or more thread concurrently,where each theread can handle a different taskat the sametime.
+
+            starts()
+          |---------->Child Thread
+          |                ^
+          |                | (witching)
+          | starts()       V
+MainThread|----------->Child Thread
+          |                ^
+          |                | (witching)
+          | starts()       V
+          |------------>Child Thread
+          
+Synchromised thraed->
+**********************
+synchronised mwthod->when your theread is going to execuets the method ,it wold acquire a lock,
+so once lock is acqired,no other thread can access the method-> once the first thread ccompletes
+
+->two ways we can achive
+1)making the method synchronise
+2)or synchronised block
+
+
+
+Thread pool
+#############
+
+Advantage of Thraed poool
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1)Thead createion time can be saved
+2)managing the  Thread lifecycle can be removed
+#3)Increased the perfprmance
+
+so if we want to use 100 thread 'we need to create new Thread1,new Thraed 2 etc etc..nw Thread 100
+
+but we have only 2 cpu ,these 2cpu neeed to andle all 100 thread
+cpu need to switch between 100 threads so context swotchung will happen,one afterthe thread so waste of time
+
+Java.util.concurrent
+
+
+
+
+Executor(I)-----> ExecutorService(I)------------->ThreadpoolExecuter
+
+
+
+           
+ThreadpoolExecuter
+#####################
+
+it helps to create sustomizable thread pool
+
+
+assume mutiple tasks coming in to the thread pool executer
+->it will check any thread is freee
+->assume5 task 3 thread
+->task 1 goes to thread1 
+->task 2 goes to thread2
+->task 3 goes to thread3
+
+so now all three threads in theread executer pool are busy
+
+->so further task are comming task 4,5,6 ,7,8 etctecc=t
+
+this will be stored in the queue ,assume the size pf queue is 5 
+now 4 to 5 task will stored in queue
+
+->now if task 9 comes there is no thread is also freee all queue is also filled
+
+->in this situation of no threads also free,no space in the queue so here thread pool executer will check
+for minimum and maximun threads size so if maximum thread is 5 and now we have only three thread in the pool
+so here for task 9 and task 10 pool will create 2 more threads in the pool
+
+->then task 11 comes it will check the threads and queue are full and chceck for the maximum size of the thread 
+here alreadt mx suze of threads are already there in the pool so now task 11 willl be rejected
+Thread Inter communications
+###########################
+wait,notify etc
+
+daemon thread
+################
+Daemon is a thread which always run along with the main thread
+we have make a the theread daemon suing keywood deamon
+
