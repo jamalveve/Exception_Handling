@@ -1,17 +1,22 @@
 Exception vs Error
+###################
 1) -> Exception is an incident which will cause program termination
  ->Errors are syntactical or logical errors ,sometime software and hardware failure is also an error it wont stop the program
  it will give wrong output
  
 2) ->exceptions are user mistake and errors are developer mistake(desingn level/code level)
-when you tell user mistake->
- In the context of user mistakes, exceptions often occur due to incorrect input or unexpected behavior from the user. For instance, if a user inputs invalid data or tries to access a resource that does not exist, the program might throw an exception to handle such situations.
-when you tell developer mistake->
+when you tell user mistake->Example scenario:
+ Exceptions often occur due to unexpected inputs or actions from users. For example, if a user tries to access a file that doesn't exist or enters invalid data into a form, 
+ these situations are considered as exceptions. They are typically recoverable, meaning the program can handle them gracefully and continue running 
+ (e.g., prompting the user to enter valid data).
+Example: FileNotFoundException occurs when a program tries to open a file that isn't present.
+
+when you tell developer mistake->Example scenario:
 Developer Mistakes: When referring to developer mistakes, errors can occur due to bugs in the code or improper handling of resources. For example, a NullPointerException that results from dereferencing a null object is usually considered a developer mistake because it indicates a flaw in the logic or design of the code.
- A StackOverflowError due to infinite recursion is a serious problem that typically needs to be fixed in the code rather than handled through exception handling mechanisms.
+ ->A StackOverflowError due to infinite recursion is a serious problem that typically needs to be fixed in the code rather than handled through exception handling mechanisms.
+ -> An OutOfMemoryError occurs when the Java Virtual Machine (JVM) runs out of memory, usually due to inefficient memory management in the code.
  
- 
- 3)->Errors are serious problems that are outside the control of the program.. In contrast, 
+3)->Errors are serious problems that are outside the control of the program.. In contrast, 
  exceptions represent unexpected events within the program that can often be handled 
  
 4) ->Exceptions can be caught and recovered while Errors cannot be caught or recovered. 
@@ -24,7 +29,7 @@ Developer Mistakes: When referring to developer mistakes, errors can occur due t
   
 TYPES OF EXCEPTION
 ##################
-Checked Exception and Unchecked Ezceptions
+Checked Exception and Unchecked Exceptions
 ->n number od exception categorised in to two categpres
 
 1)checked Exceptions
@@ -43,8 +48,8 @@ EXCEPTION HANDLING
  
  
  
- UNCHECKED eXCEPTION
- ************************
+UNCHECKED eXCEPTION
+************************
  Example:ATM
  Example:login page
    username and password ->verfy->then enter to page
@@ -54,8 +59,8 @@ EXCEPTION HANDLING
    ->user can provide any tyoe of input,we dont have control
    -.so here we are handling the excepion by notifying the user and making to run the application peacefully
    
-  How to handle Exception
-  *************************
+ How to handle Unchecked Exception
+ *************************
   ->Try Block ,Catch block
   ->TryBlock->we have to keep which code is giving exception
   ->catch block->the messge to print or throw the exception (something we wnt to notify)
@@ -68,7 +73,7 @@ try-catch-finally rukles
  }catch(){
  }
  2)->try catch can work without finnally
- 3)->catch is allways followed by finally block
+ 3)->catch is allways followed by finally block->doubt
  4)->finally block is always executed in all the cases except
               4 case:
                  1)JVM Crash:
@@ -83,9 +88,25 @@ try-catch-finally rukles
  case3:exception doesnot occured ,cat block ignored->finally executes
  }
  5)try catch with nested try catch block
- 6) try and finnly can alos be there can compile if no runtime error 
- &) try  cant be alone itshpould be either followed by catch/finally for compile
- 8) try  cant be alone itshpoulb be either followed by catch if exception there for runtime
+ 6) try and finally can also be there ->if there is no runtime error 
+ 
+ y try and finally used?if there is no need of handling the exception
+ situation:1. Resource Management
+ If you are working with resources that need to be closed, like file streams or database connections, 
+ you might use a try with a finally to guarantee that resources are released properly, even if no exceptions are thrown. 
+ or else go for try with resources.
+ 
+ situation:2: Ensuring Code Execution
+ if you have critical code that needs to run regardless of exceptions (e.g., resetting a state or logging), you can use finally without a catch.
+ try {
+    // Code that may or may not throw an exception
+} finally {
+    // Code that must execute regardless of an exception
+    System.out.println("This will always run.");
+}
+
+ 
+ 7) try  can't be alone it should be either followed by catch/finally 
  
  
  ->Y finally block?if you want to execute any statements which is not depedning the exception y
@@ -106,23 +127,23 @@ try-catch-finally rukles
  ->try catch
  ->throws 	
  
- if throws keyword is used in method signature the caller method should handle theexception  by using throws keypword.try catch
-Throw key word
+ if throws keyword is used in method signature the caller method should handle theexception  by using throws keypword.
  ******************
  	->throw keyword is used to throw the exception whch can be predifined and userdefined also
      ->You can use throw without throws for runtime exceptions,(UNchecked exception)
-     ->throw keywrd must use with throws for checked and userdefined exception
+     ->tyou  must use throw keyword with throws for checked and userdefined exception
  
  
  
  Throws keyword
  *****************
- 	->you should use throws in the method signature when you throw some exception in that method
- 	->you should use throws in the method signature even thpugh the method didnot throwing an exception
+ 	1)->you should use throws in the method signature when you throw some exception in that method IN TWO WAYS:
+ 	it is mandatory if you have checked Exception ,it is our choice(not mandatory) when you have unchecked exception
+ 	2)->you should use throws in the method signature even thpugh the method didnot throwing an exception
  	but it call the method that throws exception inside this method.
- 	->so you can use throws w/o throw also so it is like you are notifying the other method which calls method is throwing some eexception
- 	->so even though if you use try catcg to handle the exception inside the method ,ypou can declare that it throws execption
- 	->and for some checked exception java compiler itself asks us to mention throws in method signature and it notifys us to handle yhe exceptiona s well
+ 	3)->so you can use throws w/o throw also so it is like you are notifying the other method which calls method is throwing some eexception
+ 	4)->so even though if you use try catcg to handle the exception inside the method ,ypou can declare that it throws execption
+ 	5)->and for some checked exception java compiler itself asks us to mention throws in method signature and it notifys us to handle yhe exceptiona s well
  	 directly throwing an exception if the method does not throw exceptions itself. 	
 Throwable 
 **********
@@ -181,9 +202,33 @@ Parent                                         child
  Checked exception                       -> no exception
                                           ->also Unchecked Exception
                  
+                 
+                 Checked Exceptions
+                 ^^^^^^^^^^^^^^^^^^
+These exceptions are checked at compile time. The programmer must handle these exceptions using try-catch blocks or declare them in the method signature with a throws clause. 
+Common examples include:
+
+IOException - Related to input and output operations.
+SQLException - Related to database access errors.
+FileNotFoundException - Specific to file handling.
+ClassNotFoundException - Occurs when a class is not found.
+CloneNotSupportedException - Thrown when an object cannot be cloned.
+
+               Unchecked Exceptions
+               ^^^^^^^^^^^^^^^^^^^^^
+These exceptions are not checked at compile time and are subclasses of RuntimeException. They can occur at runtime and typically indicate programming errors. xCommon examples include:
+
+NullPointerException - Attempting to use null as an object reference.
+ArrayIndexOutOfBoundsException - Accessing an invalid index in an array.
+ClassCastException - Invalid casting between classes.
+ArithmeticException - Errors in arithmetic operations (e.g., division by zero).
+IllegalArgumentException - Illegal arguments passed to methods.
+
+                 
                                           
                                           
             https://javaconceptoftheday.com/java-exception-handling-quiz/
+            
             
             
  1)) Catch block takes one argument of type java.lang.Object. True OR False?
